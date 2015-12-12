@@ -6,28 +6,15 @@
 </head>
 
 <body>
-<div align="center">
-  <p> 网络爬虫博弈</p>
-  <p align="left">反爬虫：</p>
-  <p align="left"> &nbsp;&nbsp;1、 lighttped通过	 	<a href="http://redmine.lighttpd.net/projects/lighttpd/wiki/Docs_ModStatus" target="_blank">mod_status</a> 检查端口并发量。</p>
-  <p align="left">&nbsp;&nbsp;2、网站流量统计。</p>
-  <p align="left"> &nbsp;&nbsp;&nbsp;&nbsp;在页面增加统计JS（百度站长），将该统计数据对比服务器日志。该策略用于部分爬虫无法执行js代码</p>
-  <p align="left">&nbsp;&nbsp;3、爬取网上免费的代理ip，购买付费代理ip建立黑名单。</p>
-  <p align="left">&nbsp;&nbsp;4、结合redis 反爬虫。</p>
-  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;a、返回页面请求时，redis给ip的页面计数+1，在每个页面中引入一个js给redis中数据减一。设定阈值判断是否是浏览器行为</p>
-  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;b、使用redis给ip计数同时加上expression属性，5s内超过阈值设置验证码</p>
-  <p align="left">&nbsp;&nbsp;5、设置时间窗口计数反爬虫</p>
-  <p align="left">&nbsp;&nbsp;6、使用cookie反爬虫</p>
-  <p align="left">&nbsp;</p>
-  <p align="left">爬虫：</p>
-  <p align="left">&nbsp;&nbsp;1、伪装成浏览器行为，user-agent， referer</p>
-  <p align="left">&nbsp;&nbsp;2、建立池。</p>
-  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;a、使用代理，建立代理服务池，可以配合kafka，redis使用。</p>
-  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;b、建立cookie池，可以配合kafka，redis使用</p>
-  <p align="left">&nbsp;&nbsp;3、降低访问频率，主要是访问间隔，每天爬取的数量。</p>
-  <p align="left">&nbsp;&nbsp;4、随机爬取的页面。</p>
-  <p align="left">&nbsp;&nbsp;5、针对js，使用内置JS解释器或者开源浏览器内核</p>
-  <p align="left">&nbsp;&nbsp;6、针对某些flash，寻找网站的ios版本</p>
+<div align="left">
+  <p>Allen</p>
+  <p>&nbsp;</p>
+  <p>2015/12/12 <a href="/webCrawlerGame.html">网络爬虫博弈 </a></p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <p><img src="qrcode_for_gh_1af05373d1b1_430.jpg" width="266" height="259" /></p>
 </div>
 </body>
 
