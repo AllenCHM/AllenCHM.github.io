@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>金斧子系列之私募股权</title>
+</head>
+<body>
+    <div align="center">
+  <p> 金斧子系列之私募股权</p>
+  <p align="left">前言：</p>
+  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;今天等车的时候跟Wenny筒子聊天的时候，突发奇想我或许可以用自己的微信公众号写些小博客。一方面利用零碎的时间来写个小爬虫（所以很粗糙，只有requests版本），一方面记录自己写爬虫的经历与某些网页的数据逻辑，再者还可以方便数据分析的筒子直接用来抓一些常用数据（听说坑爹的老板一般都会剥削他们使用复制粘贴）.</p>
+        <p align="left">今天要分享的是金斧子－私募股权数据</p>
+        <p align="left">啥也不说，上代码:</p>
+        <pre align="left" >
+            #coding=utf-8
+            __author__ = 'AllenCHM'
+
+
+            #金斧子私募股权
+
+            import requests
+            from lxml import etree
+
+            url = u'http://www.jfz.com/pe/list.html?page=2'
+            r = requests.get(url)
+            c = r.content.decode('utf-8')
+
+
+            hxs = etree.HTML(c)
+
+            lis = hxs.xpath('//li[@class="pro_item bg_hover"]')
+            for li in lis:
+                href = u'http://www.jfz.com' + li.xpath('.//a[@class="title"]/@href')[0]
+                title = li.xpath('.//a[@class="title"]/@title')[0]
+                comment = li.xpath('.//div[@class="comment"]/text()')[0]
+                print title, href
+                print comment
+                trs = li.xpath('.//table//tr')
+                for tr in trs:
+                    a = tr.xpath('.//td')[0].xpath('string(.)')
+                    b = tr.xpath('.//td')[1].xpath('string(.)')
+                    print a, b
+                returns = li.xpath('.//div[@class="returns"]')[0].xpath('string(.)')
+                print u'起投金额:',returns
+                print
+
+            nextPage = hxs.xpath('//li[@class="next"]/a/@href')
+            if nextPage:
+                nextPage = u'http://www.jfz.com' + nextPage[0]
+                print 'nextPage:', nextPage
+        </pre>
+         <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;后期等积累到一定量了会将代码提交到github上面。</p>
+         <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;依赖包： requests， lxml。</p>
+
+        <br>
+        <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;再说了，该上车去了。</p>
+        <p><img src="qrcode_for_gh_1af05373d1b1_430.jpg" width="266" height="259" /></p>
+        <p align="left">上一篇:<a href="webCrawlerGame.html">网络爬虫博弈</a></p>
+        <p align="left"><a href="index.html">目录</a></p>
+</div>
+</body>
+</html>
