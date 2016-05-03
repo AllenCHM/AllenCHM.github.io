@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>金斧子系列之阳光私募</title>
+</head>
+<body>
+    <div align="center">
+  <p> 金斧子系列之阳光私募</p>
+        <p align="left">今天要分享的是金斧子－私募股权数据</p>
+        <br>
+  <p align="left">代码亮点：</p>
+  <p align="left"><pre>rs = hxs.xpath('//div[contains(@class, "simu_ranking_result")]//tr[@class="even" or @class="odd"]')</pre></p>
+
+        <p align="left">使用contains()函数，以及在path中是用or语句</p>
+        <br>
+  <p align="left">依赖包：</p>
+  <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;requests, lxml</p>
+    <br>
+
+
+        <p align="left">上代码:</p>
+        <pre align="left" >
+            #coding=utf-8
+            __author__ = 'AllenCHM'
+
+            #金斧子--阳光私募
+
+            import requests
+            from lxml import etree
+
+            nextPage = u'http://www.jfz.com/simu/list_a1_p4.html'
+
+
+            while nextPage:
+                r = requests.get(url=nextPage)
+                hxs = etree.HTML(r.content.decode('utf-8'))
+                trs = hxs.xpath('//div[contains(@class, "simu_ranking_result")]//tr[@class="even" or @class="odd"]')
+                for tr in trs:
+                    print u'基金名称:', tr.xpath('.//td[3]/a/@title')[0]
+                    print u'基金网页地址:', u'http://www.jfz.com'+tr.xpath('.//td[3]/a/@href')[0].strip()
+                    print u'基金经理:', tr.xpath('.//td[4]/a/text()')[0].strip()
+                    print u'基金经理网页地址:', u'http://www.jfz.com'+tr.xpath('.//td[4]/a/@href')[0].strip()
+                    print u'投资策略:', tr.xpath('.//td[5]/text()')[0].strip()
+                    print u'运行时间:', tr.xpath('.//td[6]/text()')[0].strip()
+                    print u'近6月:', tr.xpath('.//td[7]')[0].xpath('string(.)').strip()
+                    print u'近1年:', tr.xpath('.//td[8]')[0].xpath('string(.)').strip()
+                    print u'累计收益率:', tr.xpath('.//td[9]')[0].xpath('string(.)').strip()
+                    print u'年化收益率:', tr.xpath('.//td[10]')[0].xpath('string(.)').strip()
+                    print u'最新净值:', tr.xpath('.//td[11]')[0].xpath('string(.)').strip()
+                    print
+                    print
+
+                nextPage = hxs.xpath('//ul[@class="pagination"]/li[@class="next"]/a/@href')
+                if nextPage:
+                    print u'下一页:', nextPage[0]
+                    nextPage = nextPage[0]
+                else:
+                    nextPage = ''
+        </pre>
+         <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;后期等积累到一定量了会将代码提交到github上面。</p>
+
+        <br>
+        <p align="left">&nbsp;&nbsp;&nbsp;&nbsp;再说了，该上车去了。</p>
+        <p><img src="qrcode_for_gh_1af05373d1b1_430.jpg" width="266" height="259" /></p>
+        <p align="left">上一篇:<a href=金斧子系列之私募股权.html">金斧子系列之私募股权</a></p>
+        <p align="left"><a href="index.html">目录</a></p>
+</div>
+</body>
+</html>
